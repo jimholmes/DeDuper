@@ -12,13 +12,15 @@ namespace Tests
 
         public When_Working_With_Multiple_DuplicatesSteps()
         {
-           
+           proc = new FileProcessor();
         }
 
         [Given(@"The list has '(.*)' and '(.*)'")]
         public void GivenTheListHasAnd(string p0, string p1)
         {
-            IList<string> files = FilenameFactory.OneNumericPrefixDupe();
+            IList<string> files = new List<string>();
+            files.Add(p0);
+            files.Add(p1);
             proc = new FileProcessor(files);
         }
 

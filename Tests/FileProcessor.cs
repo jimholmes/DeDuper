@@ -12,6 +12,11 @@ namespace Tests
             get { return deleteList; }
         }
 
+        public FileProcessor()
+        {
+            files = new List<string>();
+        }
+
         public FileProcessor(IList<string> files)
         {
             this.files = files;
