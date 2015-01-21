@@ -7,13 +7,13 @@ Scenario: Remove one duplicate
 	Given The list has '01 foo.mp3' 
 	And  The list has '01 - foo.mp3'
 	When I select files for deletion
-	Then the result should contain '01 - foo.mp3'
+	Then the result should contain '01 foo.mp3'
 
 Scenario: Remove two different dupes
 	Given The list has '01 foo.mp3'
 	And The list has '01 - foo.mp3'
-	And The list has '02 bar'
+	And The list has '02 bar.mp3'
 	And The list has '02 - bar.mp3'
 	When I select files for deletion
-	Then the result should contain '01 - foo.mp3'
-	And the result should contain '02 - bar.mp3'
+	Then the result should contain '01 foo.mp3'
+	And the result should contain '02 bar.mp3'

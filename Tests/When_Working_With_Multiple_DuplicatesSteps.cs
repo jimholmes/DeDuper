@@ -14,8 +14,7 @@ namespace Tests
         public When_Working_With_Multiple_DuplicatesSteps()
         {
            proc = new FileProcessor();
-           files = new List<string>();
-
+            files = new List<string>();
         }
 
         [Given(@"The list has '(.*)'")]
