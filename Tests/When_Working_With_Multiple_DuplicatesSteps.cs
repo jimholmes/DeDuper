@@ -9,38 +9,34 @@ namespace Tests
     public class When_Working_With_Multiple_DuplicatesSteps
     {
         private FileProcessor proc;
+        private IList<string> files; 
 
         public When_Working_With_Multiple_DuplicatesSteps()
         {
            proc = new FileProcessor();
+           files = new List<string>();
+
         }
 
-        [Given(@"The list has '(.*)' and '(.*)'")]
-        public void GivenTheListHasAnd(string p0, string p1)
+        [Given(@"The list has '(.*)'")]
+        public void GivenTheListHasAnd(string songname)
         {
-            IList<string> files = new List<string>();
-            files.Add(p0);
-            files.Add(p1);
-            proc = new FileProcessor(files);
+            files.Add(songname);
         }
 
         [When(@"I select files for deletion")]
         public void WhenISelectFilesForDeletion()
         {
+            proc = new FileProcessor(files);
             proc.CreateDeletionList();
         }
 
         [Then(@"the result should contain '(.*)'")]
         public void ThenTheResultShouldContain(string result)
         {
-            Assert.AreEqual(result, proc.DeleteList);
+            CollectionAssert.Contains(proc.DeleteList, "01 - foo.mp3");
         }
 
-        [Given(@"The list has '(.*)', '(.*)', '(.*)', and '(.*)'")]
-        public void GivenTheListHasAnd(string p0, string p1, string p2, string p3)
-        {
-            ScenarioContext.Current.Pending();
-        }
 
     }
 }

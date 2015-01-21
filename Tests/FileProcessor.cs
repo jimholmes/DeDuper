@@ -5,9 +5,9 @@ namespace Tests
     public class FileProcessor
     {
         private IList<string> files;
-        private string deleteList;
+        private IList<string>deleteList;
 
-        public string DeleteList
+        public IList<string> DeleteList
         {
             get { return deleteList; }
         }
@@ -15,16 +15,18 @@ namespace Tests
         public FileProcessor()
         {
             files = new List<string>();
+            deleteList = new List<string>();
         }
 
         public FileProcessor(IList<string> files)
         {
             this.files = files;
+            deleteList = new List<string>();
         }
 
         internal void CreateDeletionList()
         {
-            deleteList = "01 - foo.mp3";
+            deleteList.Add("01 - foo.mp3");
 
         }
     }
