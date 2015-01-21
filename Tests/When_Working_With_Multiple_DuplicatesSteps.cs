@@ -34,7 +34,7 @@ namespace Tests
         [Then(@"the result should contain '(.*)'")]
         public void ThenTheResultShouldContain(string result)
         {
-            CollectionAssert.Contains(proc.DeleteList, "01 - foo.mp3");
+            CollectionAssert.Contains(proc.DeleteList, result);
         }
 
 
