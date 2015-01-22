@@ -7,6 +7,8 @@ namespace Logic
     public class FileProcessor
     {
         private const string PREFERRED_PREFIX = "^\\d\\d\\s+-.*";
+        private const string COPY_SUFFIX = " - Copy";
+        private const int FILEEXT_LEN = 4;
         private readonly IList<string> files;
 
         public FileProcessor()
@@ -45,6 +47,27 @@ namespace Logic
                 }
                 ResolveNonNumericDupes(songsWithSameNumericPrefix);
             }
+            ResolveCopyOfDupes();
+        }
+
+        private void ResolveCopyOfDupes()
+        {
+            IList<string> working = new List<string>();
+            var songsWithCopy = files.Where(s => s.Contains(COPY_SUFFIX));
+            foreach (var song in songsWithCopy)
+            {
+                if (song.Contains(COPY_SUFFIX))
+                {
+                    var songRoot = song.Substring(0, song.Length - (COPY_SUFFIX.Length + FILEEXT_LEN));
+
+                    var similarSongs = files.Where(s => s.Contains(songRoot));
+                    if (similarSongs.Count() == 2 )
+                    {
+                        working.Add(song);
+                    }
+                }
+            }
+            UpdateLists(working);
         }
 
         private IEnumerable<string> SongsWithDigitsAsPrefix(int songPrefix)
