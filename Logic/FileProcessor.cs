@@ -45,13 +45,13 @@ namespace Logic
                 }
                 if (songsMatchingPrefix.Count() > 1)
                 {
-                    DeleteNumericDupesFromDirectoryListAndAddToDeleteList(songsMatchingPrefix);
+                    HandleNumericDupes(songsMatchingPrefix);
                 }
-                DeleteNonNumericDupesFromDirectoryListAndAddToDeleteList(songsMatchingPrefix);
+                HandleNonNumericDupes(songsMatchingPrefix);
             }
         }
 
-        private void DeleteNonNumericDupesFromDirectoryListAndAddToDeleteList(IEnumerable<string> songsMatchingPrefix)
+        private void HandleNonNumericDupes(IEnumerable<string> songsMatchingPrefix)
         {
             var songsMatchingWithoutPrefix =
                 files.Where(s => s.StartsWith(
@@ -63,7 +63,7 @@ namespace Logic
             }
         }
 
-        private void DeleteNumericDupesFromDirectoryListAndAddToDeleteList(IEnumerable<string> songsMatchingPrefix)
+        private void HandleNumericDupes(IEnumerable<string> songsMatchingPrefix)
         {
             Regex preferredPrefix = new Regex(PREFERRED_PREFIX);
             foreach (var song in songsMatchingPrefix)
