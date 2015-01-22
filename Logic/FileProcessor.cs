@@ -37,25 +37,25 @@ namespace Logic
            
             for (int songPrefix = 1; moreSongsLeft; songPrefix++)
             {
-                var songsMatchingPrefix = 
+                var songsWithSameNumericPrefix = 
                     files.Where(s => s.StartsWith(songPrefix.ToString("D2")));
-                if (songsMatchingPrefix.Count() == 0)
+                if (songsWithSameNumericPrefix.Count() == 0)
                 {
                     break;
                 }
-                if (songsMatchingPrefix.Count() > 1)
+                if (songsWithSameNumericPrefix.Count() > 1)
                 {
-                    HandleNumericDupes(songsMatchingPrefix);
+                    HandleNumericDupes(songsWithSameNumericPrefix);
                 }
-                HandleNonNumericDupes(songsMatchingPrefix);
+                HandleNonNumericDupes(songsWithSameNumericPrefix);
             }
         }
 
-        private void HandleNonNumericDupes(IEnumerable<string> songsMatchingPrefix)
+        private void HandleNonNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
         {
             var songsMatchingWithoutPrefix =
                 files.Where(s => s.StartsWith(
-                    songsMatchingPrefix.First().Substring(5)
+                    songsWithSameNumericPrefix.First().Substring(5)
                     ));
             foreach (var song in songsMatchingWithoutPrefix)
             {
@@ -63,11 +63,15 @@ namespace Logic
             }
         }
 
-        private void HandleNumericDupes(IEnumerable<string> songsMatchingPrefix)
+        private void HandleNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
         {
             Regex preferredPrefix = new Regex(PREFERRED_PREFIX);
-            foreach (var song in songsMatchingPrefix)
+            foreach (var song in songsWithSameNumericPrefix)
             {
+                if (song.Contains(" - Copy"))
+                {
+                    DeleteList.Add(song);
+                }
                 if (! preferredPrefix.IsMatch(song))
                 {
                     DeleteList.Add(song);

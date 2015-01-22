@@ -165,6 +165,42 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("A dupe with \"copy\" is deleted")]
+        public virtual void ADupeWithCopyIsDeleted()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A dupe with \"copy\" is deleted", ((string[])(null)));
+#line 38
+this.ScenarioSetup(scenarioInfo);
+#line 39
+ testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 40
+ testRunner.And("The list has \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 42
+ testRunner.Then("the result should contain \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("A \"copy\" song by itself should not end up on delete list")]
+        public virtual void ACopySongByItselfShouldNotEndUpOnDeleteList()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A \"copy\" song by itself should not end up on delete list", ((string[])(null)));
+#line 44
+this.ScenarioSetup(scenarioInfo);
+#line 45
+ testRunner.Given("The list has \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 46
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 47
+ testRunner.Then("the result should not contain \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
