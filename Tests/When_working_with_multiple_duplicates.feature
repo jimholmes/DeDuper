@@ -17,3 +17,11 @@ Scenario: Remove two different dupes
 	When I select files for deletion
 	Then the result should contain '01 foo.mp3'
 	And the result should contain '02 bar.mp3'
+
+Scenario: Remove dupe songs with no numeric prefix
+	Given The list has '01 - foo.mp3'
+	And The list has '01 foo.mp3'
+	And The list has 'foo.mp3'
+	When I select files for deletion
+	Then the result should contain '01 foo.mp3'
+	And the result should contain 'foo.mp3'

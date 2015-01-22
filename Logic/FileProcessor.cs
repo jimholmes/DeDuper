@@ -8,6 +8,7 @@ namespace Logic
 {
     public class FileProcessor
     {
+        private const string PREFERRED_PREFIX = "^\\d\\d\\s+-.*";
         private IList<string> files;
 
         public FileProcessor()
@@ -26,33 +27,47 @@ namespace Logic
 
         public void CreateDeletionList()
         {
-            HandleNumericDupes();
+            HandleDupes();
         }
 
-        private void HandleNumericDupes()
+
+        private void HandleDupes()
         {
             bool moreSongsLeft = true;
            
 
             for (int songPrefix = 1; moreSongsLeft; songPrefix++)
             {
-                var currentSongs = 
+                var songsMatchingPrefix = 
                     files.Where(s => s.StartsWith(songPrefix.ToString("D2")));
-                if (currentSongs.Count() > 1)
+                if (songsMatchingPrefix.Count() == 0)
                 {
-                    AddDupesToDeleteList(currentSongs);
+                    break;
                 }
-                else if (currentSongs.Count()==0)
+                if (songsMatchingPrefix.Count() > 1)
                 {
-                    moreSongsLeft = false;
+                    DeleteNumericDupesFromDirectoryListAndAddToDeleteList(songsMatchingPrefix);
                 }
+                DeleteNonNumericDupesFromDirectoryListAndAddToDeleteList(songsMatchingPrefix);
             }
         }
 
-        private void AddDupesToDeleteList(IEnumerable<string> currentSongs)
+        private void DeleteNonNumericDupesFromDirectoryListAndAddToDeleteList(IEnumerable<string> songsMatchingPrefix)
         {
-            Regex preferredPrefix = new Regex("^\\d\\d\\s+-.*");
-            foreach (var song in currentSongs)
+            var songsMatchingWithoutPrefix =
+                files.Where(s => s.StartsWith(
+                    songsMatchingPrefix.First().Substring(5)
+                    ));
+            foreach (var song in songsMatchingWithoutPrefix)
+            {
+                DeleteList.Add(song);
+            }
+        }
+
+        private void DeleteNumericDupesFromDirectoryListAndAddToDeleteList(IEnumerable<string> songsMatchingPrefix)
+        {
+            Regex preferredPrefix = new Regex(PREFERRED_PREFIX);
+            foreach (var song in songsMatchingPrefix)
             {
                 if (! preferredPrefix.IsMatch(song))
                 {
