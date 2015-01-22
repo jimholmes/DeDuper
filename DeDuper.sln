@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{97ED9A
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{3B680302-30F9-4F1D-9393-384202EC817C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{A5D2BCE4-11A8-424B-BE3A-333D503BC48C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D2BCE4-11A8-424B-BE3A-333D503BC48C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5D2BCE4-11A8-424B-BE3A-333D503BC48C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B680302-30F9-4F1D-9393-384202EC817C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B680302-30F9-4F1D-9393-384202EC817C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B680302-30F9-4F1D-9393-384202EC817C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B680302-30F9-4F1D-9393-384202EC817C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Tests
+namespace Logic
 {
     public class FileProcessor
     {
@@ -24,7 +24,7 @@ namespace Tests
 
         public IList<string> DeleteList { get; private set; }
 
-        internal void CreateDeletionList()
+        public void CreateDeletionList()
         {
             HandleNumericDupes();
         }
