@@ -37,46 +37,65 @@ namespace Logic
            
             for (int songPrefix = 1; moreSongsLeft; songPrefix++)
             {
-                var songsWithSameNumericPrefix = 
-                    files.Where(s => s.StartsWith(songPrefix.ToString("D2")));
+                var songsWithSameNumericPrefix = SongsWithDigitsAsPrefix(songPrefix);
                 if (songsWithSameNumericPrefix.Count() == 0)
                 {
                     break;
                 }
                 if (songsWithSameNumericPrefix.Count() > 1)
                 {
-                    HandleNumericDupes(songsWithSameNumericPrefix);
+                    IdentifyNumericDupes(songsWithSameNumericPrefix);
                 }
-                HandleNonNumericDupes(songsWithSameNumericPrefix);
+                IdentifyNonNumericDupes(songsWithSameNumericPrefix);
             }
         }
 
-        private void HandleNonNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
+        private IEnumerable<string> SongsWithDigitsAsPrefix(int songPrefix)
         {
+            return files.Where(s => s.StartsWith(songPrefix.ToString("D2")));
+        }
+
+        private void IdentifyNonNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
+        {
+            IList<string> stuffToDelete = new List<string>();
             var songsMatchingWithoutPrefix =
                 files.Where(s => s.StartsWith(
                     songsWithSameNumericPrefix.First().Substring(5)
                     ));
             foreach (var song in songsMatchingWithoutPrefix)
             {
+                stuffToDelete.Add(song);
+            }
+
+            UpdateLists(stuffToDelete);
+        }
+
+        private void UpdateLists(IList<string> stuffToDelete)
+        {
+            foreach (var song in stuffToDelete)
+            {
                 DeleteList.Add(song);
+                files.Remove(song);
             }
         }
 
-        private void HandleNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
+        private void IdentifyNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
         {
+            IList<string> stuffToDelete = new List<string>();
+
             Regex preferredPrefix = new Regex(PREFERRED_PREFIX);
             foreach (var song in songsWithSameNumericPrefix)
             {
                 if (song.Contains(" - Copy"))
                 {
-                    DeleteList.Add(song);
+                    stuffToDelete.Add(song);
                 }
                 if (! preferredPrefix.IsMatch(song))
                 {
-                    DeleteList.Add(song);
+                    stuffToDelete.Add(song);
                 }
             }
+            UpdateLists(stuffToDelete);
         }
     }
 }
