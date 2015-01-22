@@ -2,7 +2,6 @@
 	In order to get rid of duplicates in a directory
 	I want to save ONLY files in the pattern '01 - '
 
-@mytag
 Scenario: Remove one duplicate 
 	Given The list has '01 foo.mp3' 
 	And  The list has '01 - foo.mp3'
