@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -9,7 +7,7 @@ namespace Logic
     public class FileProcessor
     {
         private const string PREFERRED_PREFIX = "^\\d\\d\\s+-.*";
-        private IList<string> files;
+        private readonly IList<string> files;
 
         public FileProcessor()
         {
@@ -30,12 +28,11 @@ namespace Logic
             HandleDupes();
         }
 
-
         private void HandleDupes()
         {
-            bool moreSongsLeft = true;
-           
-            for (int songPrefix = 1; moreSongsLeft; songPrefix++)
+            var moreSongsLeft = true;
+
+            for (var songPrefix = 1; moreSongsLeft; songPrefix++)
             {
                 var songsWithSameNumericPrefix = SongsWithDigitsAsPrefix(songPrefix);
                 if (songsWithSameNumericPrefix.Count() == 0)
@@ -44,9 +41,9 @@ namespace Logic
                 }
                 if (songsWithSameNumericPrefix.Count() > 1)
                 {
-                    IdentifyNumericDupes(songsWithSameNumericPrefix);
+                    ResolveNumericDupes(songsWithSameNumericPrefix);
                 }
-                IdentifyNonNumericDupes(songsWithSameNumericPrefix);
+                ResolveNonNumericDupes(songsWithSameNumericPrefix);
             }
         }
 
@@ -55,7 +52,7 @@ namespace Logic
             return files.Where(s => s.StartsWith(songPrefix.ToString("D2")));
         }
 
-        private void IdentifyNonNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
+        private void ResolveNonNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
         {
             IList<string> stuffToDelete = new List<string>();
             var songsMatchingWithoutPrefix =
@@ -70,6 +67,26 @@ namespace Logic
             UpdateLists(stuffToDelete);
         }
 
+
+        private void ResolveNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
+        {
+            IList<string> stuffToDelete = new List<string>();
+
+            var preferredPrefix = new Regex(PREFERRED_PREFIX);
+            foreach (var song in songsWithSameNumericPrefix)
+            {
+                if (song.Contains(" - Copy"))
+                {
+                    stuffToDelete.Add(song);
+                }
+                if (!preferredPrefix.IsMatch(song))
+                {
+                    stuffToDelete.Add(song);
+                }
+            }
+            UpdateLists(stuffToDelete);
+        }
+
         private void UpdateLists(IList<string> stuffToDelete)
         {
             foreach (var song in stuffToDelete)
@@ -79,23 +96,5 @@ namespace Logic
             }
         }
 
-        private void IdentifyNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
-        {
-            IList<string> stuffToDelete = new List<string>();
-
-            Regex preferredPrefix = new Regex(PREFERRED_PREFIX);
-            foreach (var song in songsWithSameNumericPrefix)
-            {
-                if (song.Contains(" - Copy"))
-                {
-                    stuffToDelete.Add(song);
-                }
-                if (! preferredPrefix.IsMatch(song))
-                {
-                    stuffToDelete.Add(song);
-                }
-            }
-            UpdateLists(stuffToDelete);
-        }
     }
 }
