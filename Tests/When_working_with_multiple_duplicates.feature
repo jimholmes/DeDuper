@@ -41,6 +41,12 @@ Scenario: A dupe with "copy" is deleted
 	When I select files for deletion
 	Then the result should contain '01 - foo - Copy.mp3'
 
+Scenario: A non-numeric dupe with "copy" is deleted
+	Given The list has 'foo.mp3'
+	And The list has 'foo - Copy.mp3'
+	When I select files for deletion
+	Then the result should contain 'foo - Copy.mp3'
+
 Scenario: A "copy" song by itself should not end up on delete list
 	Given The list has '01 - foo - Copy.mp3'
 	When I select files for deletion
@@ -49,9 +55,11 @@ Scenario: A "copy" song by itself should not end up on delete list
 Scenario: Remove dupes with numerics, no numerics, and numeric plus 'Copy'
 	Given The list has '01 - foo.mp3'
 	And The list has '01 foo.mp3'
+	And The list has 'foo - Copy.mp3'
 	And The list has 'foo.mp3'
 	And The list has '01 - foo - Copy.mp3'
 	When I select files for deletion
 	Then the result should contain '01 foo.mp3'
 	And the result should contain '01 - foo - Copy.mp3'
+	And the result should contain 'foo - Copy.mp3'
 	And the result should contain 'foo.mp3'

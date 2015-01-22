@@ -186,17 +186,36 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("A non-numeric dupe with \"copy\" is deleted")]
+        public virtual void ANon_NumericDupeWithCopyIsDeleted()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A non-numeric dupe with \"copy\" is deleted", ((string[])(null)));
+#line 44
+this.ScenarioSetup(scenarioInfo);
+#line 45
+ testRunner.Given("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 46
+ testRunner.And("The list has \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 48
+ testRunner.Then("the result should contain \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("A \"copy\" song by itself should not end up on delete list")]
         public virtual void ACopySongByItselfShouldNotEndUpOnDeleteList()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A \"copy\" song by itself should not end up on delete list", ((string[])(null)));
-#line 44
+#line 50
 this.ScenarioSetup(scenarioInfo);
-#line 45
+#line 51
  testRunner.Given("The list has \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
+#line 52
  testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 47
+#line 53
  testRunner.Then("the result should not contain \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -207,23 +226,27 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void RemoveDupesWithNumericsNoNumericsAndNumericPlusCopy()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove dupes with numerics, no numerics, and numeric plus \'Copy\'", ((string[])(null)));
-#line 49
-this.ScenarioSetup(scenarioInfo);
-#line 50
- testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
- testRunner.And("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
- testRunner.And("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
- testRunner.And("The list has \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
- testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 55
- testRunner.Then("the result should contain \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
 #line 56
- testRunner.And("the result should contain \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 57
+ testRunner.And("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+ testRunner.And("The list has \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
+ testRunner.And("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 60
+ testRunner.And("The list has \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 61
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 62
+ testRunner.Then("the result should contain \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 63
+ testRunner.And("the result should contain \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
+ testRunner.And("the result should contain \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 65
  testRunner.And("the result should contain \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
