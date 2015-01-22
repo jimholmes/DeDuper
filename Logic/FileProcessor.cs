@@ -35,7 +35,6 @@ namespace Logic
         {
             bool moreSongsLeft = true;
            
-
             for (int songPrefix = 1; moreSongsLeft; songPrefix++)
             {
                 var songsMatchingPrefix = 

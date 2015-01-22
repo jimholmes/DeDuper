@@ -37,6 +37,13 @@ namespace Tests
             CollectionAssert.Contains(proc.DeleteList, result);
         }
 
+        [Then(@"the result should not contain '(.*)'")]
+        public void ThenTheResultShouldNotContain(string result)
+        {
+            CollectionAssert.DoesNotContain(proc.DeleteList, result);
+        }
+
+
 
     }
 }
