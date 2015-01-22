@@ -23,6 +23,11 @@ I did not say please. A backup is not optional.
 Point the exe at the root of the folder structure you want, fire it off.
   d:> DeDuper.exe d:\music_archives
 
+**Note** DeDuper will process *all* files in the tree. It doesn't (currently)
+try to figure out what's a music file and what's not. If you have two text 
+files that match the algorithm one's going to be ground into bits and thrown to
+the wolves. To mix bad metaphors.
+
 ## Examples
 
 Preferred Prefix is two digits, a space, a dash, and another space, eg
@@ -34,6 +39,7 @@ the others will be deleted.
 	01 - foo.mp3
 	01 foo.mp3
 	foo.mp3
+	foo - Copy.mp3
 	02 - bar.mp3
 	02 bar.mp3
 	bar.mp3
