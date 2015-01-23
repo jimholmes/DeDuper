@@ -19,7 +19,7 @@ namespace Logic
 
         public FileProcessor(IList<string> files)
         {
-            this.files = files;
+            this.files = new List<string>(files);
             DeleteList = new List<string>();
         }
 
@@ -48,6 +48,49 @@ namespace Logic
                 ResolveNonNumericDupes(songsWithSameNumericPrefix);
             }
             ResolveCopyOfDupes();
+            ResolveParensNumberDupes();
+        }
+
+        //Removes dupes which are in form '01 - foo(1).mp3'
+        private void ResolveParensNumberDupes()
+        {
+            var parenFiles = GetParensNumFileList();
+            if (parenFiles.Count()==0) { return;}
+            else{
+                IList<string> workingList = new List<string>();
+                foreach (var parenFile in parenFiles)
+                {
+                    var fileRoot = GetRootOfParensFile(parenFile);
+                    Regex targetName = new Regex(fileRoot + "\\.[a-zA-Z0-9]{3}");
+                    foreach (var file in files)
+                    {
+                        var m = targetName.Match(file);
+                        if (m.Success)
+                        {
+                            workingList.Add(parenFile);
+                        }
+                    }
+                }
+                UpdateLists(workingList);
+            }
+        }
+
+        public string GetRootOfParensFile(string file)
+        {
+            var position = file.LastIndexOf("(");
+            return  file.Substring(0, position);
+        }
+
+        public IEnumerable<string> GetParensNumFileList()
+        {
+            Regex parenNumRegex = new Regex("\\(\\d+\\)");
+
+            var parensFiles = from file in files
+                let matches = parenNumRegex.Match(file)
+                where matches.Length > 0
+                select file;
+
+            return parensFiles;
         }
 
         private void ResolveCopyOfDupes()
@@ -70,10 +113,6 @@ namespace Logic
             UpdateLists(working);
         }
 
-        private IEnumerable<string> SongsWithDigitsAsPrefix(int songPrefix)
-        {
-            return files.Where(s => s.StartsWith(songPrefix.ToString("D2")));
-        }
 
         private void ResolveNonNumericDupes(IEnumerable<string> songsWithSameNumericPrefix)
         {
@@ -117,6 +156,10 @@ namespace Logic
                 DeleteList.Add(song);
                 files.Remove(song);
             }
+        }
+        private IEnumerable<string> SongsWithDigitsAsPrefix(int songPrefix)
+        {
+            return files.Where(s => s.StartsWith(songPrefix.ToString("D2")));
         }
 
     }
