@@ -37,7 +37,9 @@ the others will be deleted.
 **Given**
 
 	01 - foo.mp3
+	01 - foo - Copy.mp3
 	01 foo.mp3
+	foo(1).mp3
 	foo.mp3
 	foo - Copy.mp3
 	02 - bar.mp3
@@ -48,3 +50,5 @@ the others will be deleted.
 
 	01 - foo.mp3
 	02 - bar.mp3
+
+Or you could like, go read the specs in the Test folder and see exactly what's going on!
