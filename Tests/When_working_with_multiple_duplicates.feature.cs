@@ -32,8 +32,8 @@ namespace Tests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "When_working_with_multiple_duplicates", "In order to get rid of duplicates in a directory\nI want to save ONLY files in the" +
-                    " pattern \'01 - \'", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "When_working_with_multiple_duplicates", "In order to get rid of duplicates in a directory\r\nI want to save ONLY files in th" +
+                    "e pattern \'01 - \'", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -66,19 +66,36 @@ namespace Tests
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("No duplicates")]
+        public virtual void NoDuplicates()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No duplicates", ((string[])(null)));
+#line 5
+this.ScenarioSetup(scenarioInfo);
+#line 6
+ testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 7
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 8
+ testRunner.Then("the result should contain nothing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Remove one duplicate")]
         public virtual void RemoveOneDuplicate()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove one duplicate", ((string[])(null)));
-#line 5
+#line 10
 this.ScenarioSetup(scenarioInfo);
-#line 6
+#line 11
  testRunner.Given("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 7
+#line 12
  testRunner.And("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 8
+#line 13
  testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 9
+#line 14
  testRunner.Then("the result should contain \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -89,15 +106,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void RemoveADupeWithParensNumber()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove a dupe with parens number", ((string[])(null)));
-#line 11
+#line 16
 this.ScenarioSetup(scenarioInfo);
-#line 12
+#line 17
  testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 13
+#line 18
  testRunner.And("The list has \'01 - foo(1).mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
+#line 19
  testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
+#line 20
  testRunner.Then("the result should contain \'01 - foo(1).mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -108,21 +125,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void RemoveTwoDifferentDupes()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove two different dupes", ((string[])(null)));
-#line 17
-this.ScenarioSetup(scenarioInfo);
-#line 18
- testRunner.Given("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 19
- testRunner.And("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
- testRunner.And("The list has \'02 bar.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
- testRunner.And("The list has \'02 - bar.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
- testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 23
- testRunner.Then("the result should contain \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 24
+ testRunner.And("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+ testRunner.And("The list has \'02 bar.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 26
+ testRunner.And("The list has \'02 - bar.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
+ testRunner.Then("the result should contain \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 29
  testRunner.And("the result should contain \'02 bar.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -133,19 +150,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void RemoveDupeSongsWithNoNumericPrefix()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove dupe songs with no numeric prefix", ((string[])(null)));
-#line 26
-this.ScenarioSetup(scenarioInfo);
-#line 27
- testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 28
- testRunner.And("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
- testRunner.And("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
- testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 31
- testRunner.Then("the result should contain \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
 #line 32
+ testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 33
+ testRunner.And("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 34
+ testRunner.And("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 35
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 36
+ testRunner.Then("the result should contain \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 37
  testRunner.And("the result should contain \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -156,13 +173,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ANon_NumericSongByItselfShouldNotEndUpOnDeleteList()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A non-numeric song by itself should not end up on delete list", ((string[])(null)));
-#line 34
+#line 39
 this.ScenarioSetup(scenarioInfo);
-#line 35
+#line 40
  testRunner.Given("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 41
  testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 37
+#line 42
  testRunner.Then("the result should not contain \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -173,13 +190,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ANumericSongByItselfShouldNotEndUpOnDeleteList()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A numeric song by itself should not end up on delete list", ((string[])(null)));
-#line 39
+#line 44
 this.ScenarioSetup(scenarioInfo);
-#line 40
+#line 45
  testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 41
+#line 46
  testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 42
+#line 47
  testRunner.Then("the result should not contain \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -190,15 +207,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ADupeWithCopyIsDeleted()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A dupe with \"copy\" is deleted", ((string[])(null)));
-#line 44
+#line 49
 this.ScenarioSetup(scenarioInfo);
-#line 45
+#line 50
  testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
+#line 51
  testRunner.And("The list has \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 52
  testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 48
+#line 53
  testRunner.Then("the result should contain \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -209,15 +226,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ANon_NumericDupeWithCopyIsDeleted()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A non-numeric dupe with \"copy\" is deleted", ((string[])(null)));
-#line 50
+#line 55
 this.ScenarioSetup(scenarioInfo);
-#line 51
+#line 56
  testRunner.Given("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
+#line 57
  testRunner.And("The list has \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 58
  testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 54
+#line 59
  testRunner.Then("the result should contain \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -228,13 +245,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ACopySongByItselfShouldNotEndUpOnDeleteList()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A \"copy\" song by itself should not end up on delete list", ((string[])(null)));
-#line 56
+#line 61
 this.ScenarioSetup(scenarioInfo);
-#line 57
+#line 62
  testRunner.Given("The list has \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 58
+#line 63
  testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 59
+#line 64
  testRunner.Then("the result should not contain \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -245,36 +262,152 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void RemoveDupesWithNumericsNoNumericsParensNumbersAndNumericPlusCopy()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove dupes with numerics, no numerics, parens numbers, and numeric plus \'Copy\'", ((string[])(null)));
-#line 61
-this.ScenarioSetup(scenarioInfo);
-#line 62
- testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 63
- testRunner.And("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
- testRunner.And("The list has \'01 foo(1).mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
- testRunner.And("The list has \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 66
- testRunner.And("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 67
- testRunner.And("The list has \'foo(2).mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 68
- testRunner.And("The list has \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 69
- testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("The list has \'01 foo(1).mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 70
- testRunner.Then("the result should contain \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("The list has \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 71
- testRunner.Then("the result should contain \'01 foo(1).mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 72
- testRunner.And("the result should contain \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("The list has \'foo(2).mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
- testRunner.And("the result should contain \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("The list has \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
- testRunner.And("the result should contain \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 75
+ testRunner.Then("the result should contain \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 76
+ testRunner.Then("the result should contain \'01 foo(1).mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 77
+ testRunner.And("the result should contain \'01 - foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
+ testRunner.And("the result should contain \'foo - Copy.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 79
+ testRunner.And("the result should contain \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 80
  testRunner.And("the result should contain \'foo(2).mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Dupe prefixes on different songs")]
+        public virtual void DupePrefixesOnDifferentSongs()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Dupe prefixes on different songs", ((string[])(null)));
+#line 82
+this.ScenarioSetup(scenarioInfo);
+#line 83
+ testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 84
+ testRunner.And("The list has \'01 - bar.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 85
+ testRunner.And("The list has \'02 foobar.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 86
+ testRunner.And("The list has \'02 barfoo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 87
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 88
+ testRunner.Then("the result should contain nothing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("No dupes, but not preferred prefix")]
+        public virtual void NoDupesButNotPreferredPrefix()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No dupes, but not preferred prefix", ((string[])(null)));
+#line 90
+this.ScenarioSetup(scenarioInfo);
+#line 91
+ testRunner.Given("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 92
+ testRunner.And("The list has \'02 bar.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 93
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 94
+ testRunner.Then("the result should contain nothing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 95
+ testRunner.And("No exception should be generated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Handle three digit prefixes")]
+        public virtual void HandleThreeDigitPrefixes()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Handle three digit prefixes", ((string[])(null)));
+#line 97
+this.ScenarioSetup(scenarioInfo);
+#line 98
+ testRunner.Given("The list has \'111 - bar.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 99
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 100
+ testRunner.Then("the result should contain nothing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Handle repeating prefix")]
+        public virtual void HandleRepeatingPrefix()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Handle repeating prefix", ((string[])(null)));
+#line 102
+this.ScenarioSetup(scenarioInfo);
+#line 103
+ testRunner.Given("The list has \'01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 104
+ testRunner.And("The list has \'01-01 - foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 105
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Non-preferred numeric prefix and alpha dupe leaves numeric")]
+        public virtual void Non_PreferredNumericPrefixAndAlphaDupeLeavesNumeric()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Non-preferred numeric prefix and alpha dupe leaves numeric", ((string[])(null)));
+#line 107
+this.ScenarioSetup(scenarioInfo);
+#line 108
+ testRunner.Given("The list has \'01 foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 109
+ testRunner.And("The list has \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 110
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 111
+ testRunner.Then("the result should contain \'foo.mp3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Differing prefix and file type")]
+        public virtual void DifferingPrefixAndFileType()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Differing prefix and file type", ((string[])(null)));
+#line 113
+this.ScenarioSetup(scenarioInfo);
+#line 114
+ testRunner.Given("The list has \'01 - foo.m4a\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 115
+ testRunner.And("The list has \'foo.m4p\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 116
+ testRunner.When("I select files for deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 117
+ testRunner.Then("the result should contain \'01 - foo.m4a\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

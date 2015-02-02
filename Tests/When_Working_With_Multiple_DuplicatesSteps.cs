@@ -43,6 +43,17 @@ namespace Tests
             CollectionAssert.DoesNotContain(proc.DeleteList, result);
         }
 
+        [Then(@"the result should contain nothing")]
+        public void ThenTheResultShouldContainNothing()
+        {
+            CollectionAssert.IsEmpty(proc.DeleteList);
+        }
+
+        [Then(@"No exception should be generated")]
+        public void ThenNoExceptionShouldBeGenerated()
+        {
+           Assert.DoesNotThrow(() => proc.CreateDeletionList());
+        }
 
 
     }
