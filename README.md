@@ -8,11 +8,6 @@ This util is meant to remove dupe songs from a folder hierarchy. Somehow I
 ended up with a crapload of duplicated stuff in my music folder archive after
 migrating from one system to another. This util is meant to clean that mess up.
 
-## Status
-
-Current state doesn't actually execute anything. I'm nailing down the logic around
-finding dupes.
-
 # **WARNING**
 
 Make a backup of your music directory **before** running this. You may notice
