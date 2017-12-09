@@ -20,17 +20,7 @@ namespace Tests
             items.Add("gwatz");
         }
 
-        [Test]
-        [ExpectedException(typeof (InvalidOperationException))]
-        public void throws_exception()
-        {
-            var stuff = items.Where(f => f.StartsWith("foo"));
-            foreach (var thing in stuff) //exception here!
-            {
-                items.Remove(thing);
-            }
-        }
-
+        
         [Test]
         public void works()
         {
