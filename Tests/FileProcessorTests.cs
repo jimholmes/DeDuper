@@ -13,7 +13,7 @@ namespace Tests
     {
         private IList<string> files;
         private FileProcessor proc;
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Fixture_Setup()
         {
             files = new List<string>()
