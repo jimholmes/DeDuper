@@ -47,3 +47,8 @@ the others will be deleted.
 	02 - bar.mp3
 
 Or you could like, go read the specs in the Test folder and see exactly what's going on!
+
+## Status
+
+There's a mix of CamelCasing and snake_casing. I prefer snake, but started this years ago 
+with Camel. I'm gradually migrating to snake. It's ugly having mixed in the files. Sorry.
